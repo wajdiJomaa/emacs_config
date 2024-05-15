@@ -16,7 +16,10 @@
 - [[#all-the-icons][ALL THE ICONS]]
 - [[#buffer-move][Buffer Move]]
 - [[#buffer-move-key-bindings][Buffer Move key Bindings]]
-- [[#jedi-autocomplete][Jedi autocomplete]]
+- [[#jedi-autcomplete-removed][Jedi Autcomplete (Removed)]]
+- [[#highlight-indentation][Highlight Indentation]]
+- [[#fly-check][Fly check]]
+- [[#elpy-python][Elpy python]]
 - [[#doom-emacs-theme][Doom emacs theme]]
 
 * Download Elpaca
@@ -291,14 +294,39 @@ one, an error is signaled."
 (global-set-key  (kbd "C-c d") 'buf-move-down)
 #+end_src
 
-* Jedi autocomplete
-
-#+begin_src emacs-lisp
-(use-package jedi :ensure t :demand t)
+* Jedi Autcomplete (Removed)
+#+begin_src 
+(use-package jedi :ensure t)
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)
 #+end_src
 
+* Highlight Indentation 
+
+#+begin_src emacs-lisp
+(use-package highlight-indent-guides :ensure t)
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+#+end_src
+
+
+* Fly check
+#+begin_src emacs-lisp
+(use-package flycheck
+  :ensure t)
+#+end_src
+
+* Elpy python
+#+begin_src emacs-lisp
+  (use-package elpy
+    :ensure t
+    :init (elpy-enable)
+    :config 
+    (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+    (add-hook 'elpy-mode-hook 'flycheck-mode)
+  )
+
+  (setenv "WORKON_HOME" "/home/wajdi/Desktop/m2_project/")
+#+end_src
 
 * Doom emacs theme
 #+begin_src emacs-lisp
